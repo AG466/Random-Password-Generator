@@ -90,10 +90,10 @@ var upperCasedCharacters = [
 
 var password = {
   length: 0,
-  incLwrCase: [],
-  incUppCase: [],
-  incNumbs: [],
-  incSpecials: [],
+  incLwrCase: false,
+  incUppCase: false,
+  incNumbs: false,
+  incSpecials: false,
   includeInPassword: []
 }
 
@@ -123,21 +123,21 @@ function getPasswordOptions(){
 
       userChoiceLwr = confirm("Do you want your password to include lower case characters?");
       if(userChoiceLwr === true){
-        password.incLwrCase = lowerCasedCharacters;
+        password.incLwrCase = true;
 
       }
       userChoiceUppr = confirm("Do you want your password to include upper case characters?");
       if(userChoiceUppr === true){
-        password.incUppCase = upperCasedCharacters;
+        password.incUppCase = true;
       }
       userChoiceNumb = confirm("Do you want your password to include numbers?");
       if(userChoiceNumb === true){
-        password.incNumbs = numericCharacters;
+        password.incNumbs = true;
 
       }
       userChoiceSpecials = confirm("Do you want your password to include special characters?");
       if(userChoiceSpecials === true){
-        password.incSpecials = specialCharacters;
+        password.incSpecials = true;
       
       }
 
@@ -158,23 +158,24 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-// function generatePassword() {
-//   console.log("a" + password.incLwrCase);
-//   if(password.incLwrCase === true){
-//     password.includeInPassword = includeInPassword.concat(password.incLwrCase);
-//   }
+function generatePassword() {
+  console.log(password.incLwrCase);
   
-//   if(password.incUppCase === true){
-//     password.includeInPassword = includeInPassword.concat(password.incUppCase);
-//   }
+  if(password.incLwrCase === true){
+    password.includeInPassword = password.includeInPassword.concat(lowerCasedCharacters);
+  }
   
-//   if(password.incNumbs === true){
-//     password.includeInPassword = includeInPassword.concat(password.incNumbs);
-//   }
+  if(password.incUppCase === true){
+    password.includeInPassword = password.includeInPassword.concat(upperCasedCharacters);
+  }
   
-//   if(password.incSpecials === true){
-//     password.includeInPassword = includeInPassword.concat(password.incSpecials);
-//   }
+  if(password.incNumbs === true){
+    password.includeInPassword = password.includeInPassword.concat(numericCharacters);
+  }
+  
+  if(password.incSpecials === true){
+    password.includeInPassword = password.includeInPassword.concat(specialCharacters);
+  }
   
 }
 
