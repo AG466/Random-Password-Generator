@@ -125,20 +125,24 @@ function getPasswordOptions(){
       userChoiceLwr = confirm("Do you want your password to include lower case characters?");
       if(userChoiceLwr === true){
         password.incLwrCase = true;
+        password.passwordInput = password.passwordInput.concat(lowerCasedCharacters);
 
       }
       userChoiceUppr = confirm("Do you want your password to include upper case characters?");
       if(userChoiceUppr === true){
         password.incUppCase = true;
+        password.passwordInput = password.passwordInput.concat(upperCasedCharacters);
       }
       userChoiceNumb = confirm("Do you want your password to include numbers?");
       if(userChoiceNumb === true){
         password.incNumbs = true;
+        password.passwordInput = password.passwordInput.concat(numericCharacters);
 
       }
       userChoiceSpecials = confirm("Do you want your password to include special characters?");
       if(userChoiceSpecials === true){
         password.incSpecials = true;
+        password.passwordInput = password.passwordInput.concat(specialCharacters);
       
       }
 
@@ -157,7 +161,7 @@ console.log(password);
 // Function for getting a random element from an array
 //Needs to be set to the total number of values within the inputArray
 function getRandom() {
-  var randomIndex = Math.floor(Math.random() * password.length) + 1;
+  var randomIndex = Math.floor(Math.random() * password.passwordInput.length) + 1;
   return(randomIndex);
 }
 
@@ -166,32 +170,30 @@ getRandom();
 function generatePassword() {
   console.log(password.incLwrCase);
   
-  if(password.incLwrCase === true){
-    password.passwordInput = password.passwordInput.concat(lowerCasedCharacters);
-  }
+  // if(password.incLwrCase === true){
+  //   password.passwordInput = password.passwordInput.concat(lowerCasedCharacters);
+  // }
   
-  if(password.incUppCase === true){
-    password.passwordInput = password.passwordInput.concat(upperCasedCharacters);
-  }
+  // if(password.incUppCase === true){
+  //   password.passwordInput = password.passwordInput.concat(upperCasedCharacters);
+  // }
   
-  if(password.incNumbs === true){
-    password.passwordInput = password.passwordInput.concat(numericCharacters);
-  }
+  // if(password.incNumbs === true){
+  //   password.passwordInput = password.passwordInput.concat(numericCharacters);
+  // }
   
-  if(password.incSpecials === true){
-    password.passwordInput = password.passwordInput.concat(specialCharacters);
-  }
+  // if(password.incSpecials === true){
+  //   password.passwordInput = password.passwordInput.concat(specialCharacters);
+  // }
 
   for(var i =0;i <= password.length;i++){
     password.passwordOutput[i] = password.passwordInput[getRandom()];
-    console.log(password.passwordInput[getRandom()]);
   }
-  
-  
+  return  password.passwordOutput.join('');
 }
 
-generatePassword();
-console.log(password);
+
+
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
