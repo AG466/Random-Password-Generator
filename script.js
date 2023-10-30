@@ -94,7 +94,8 @@ var password = {
   incUppCase: false,
   incNumbs: false,
   incSpecials: false,
-  includeInPassword: []
+  passwordInput: [],
+  passwordOutput: []
 }
 
 
@@ -105,21 +106,21 @@ var password = {
 
 function getPasswordOptions(){
     do{
-      var pwordLenght = prompt("Choose how long you would like your password to be: Minimum length 8, Maximum length 128");//user specifies length
-        if(pwordLenght >= 8 && pwordLenght <=128){
+      var pwordLength = prompt("Choose how long you would like your password to be: Minimum length 8, Maximum length 128");//user specifies length
+        if(pwordLength >= 8 && pwordLength <=128){
           validation = true;
           break;
-        } else if (pwordLenght > 128){
+        } else if (pwordLength > 128){
           alert("You have requested a password longer than 128 characters"); 
           validation = false;
-        } else if (pwordLenght < 8){
+        } else if (pwordLength < 8){
           alert("too small");
           validation = false;
         }
       }
       while (validation != true);
 
-      password.length = pwordLenght;
+      password.length = Number(pwordLength);
 
       userChoiceLwr = confirm("Do you want your password to include lower case characters?");
       if(userChoiceLwr === true){
@@ -154,28 +155,38 @@ console.log(password);
 
 
 // Function for getting a random element from an array
-function getRandom(arr) {
+//Needs to be set to the total number of values within the inputArray
+function getRandom() {
+  var randomIndex = Math.floor(Math.random() * password.length) + 1;
+  return(randomIndex);
 }
 
+getRandom();
 // Function to generate password with user input
 function generatePassword() {
   console.log(password.incLwrCase);
   
   if(password.incLwrCase === true){
-    password.includeInPassword = password.includeInPassword.concat(lowerCasedCharacters);
+    password.passwordInput = password.passwordInput.concat(lowerCasedCharacters);
   }
   
   if(password.incUppCase === true){
-    password.includeInPassword = password.includeInPassword.concat(upperCasedCharacters);
+    password.passwordInput = password.passwordInput.concat(upperCasedCharacters);
   }
   
   if(password.incNumbs === true){
-    password.includeInPassword = password.includeInPassword.concat(numericCharacters);
+    password.passwordInput = password.passwordInput.concat(numericCharacters);
   }
   
   if(password.incSpecials === true){
-    password.includeInPassword = password.includeInPassword.concat(specialCharacters);
+    password.passwordInput = password.passwordInput.concat(specialCharacters);
   }
+
+  for(var i =0;i <= password.length;i++){
+    password.passwordOutput[i] = password.passwordInput[getRandom()];
+    console.log(password.passwordInput[getRandom()]);
+  }
+  
   
 }
 
