@@ -111,17 +111,17 @@ function getPasswordOptions(){
           validation = true;
           break;
         } else if (pwordLength > 128){
-          alert("You have requested a password longer than 128 characters"); 
+          alert("The maximum number of characters is 128. Please try again."); 
           validation = false;
         } else if (pwordLength < 8){
-          alert("too small");
+          alert("To ensure you get a strong password, the minimum number of characters is 8. Please try again.");
           validation = false;
         }
       }
       while (validation != true);
 
       password.length = Number(pwordLength);
-
+      
       userChoiceLwr = confirm("Do you want your password to include lower case characters?");
       if(userChoiceLwr === true){
         password.incLwrCase = true;
@@ -147,6 +147,11 @@ function getPasswordOptions(){
       
       }
 
+      if(password.incLwrCase === false && password.incUppCase ===false && password.incNumbs === false && password.incSpecials === false){
+        alert("You must select at least one character set for your password, please try again." );
+        location.reload();
+      }
+
       return password;
       
   }
@@ -154,7 +159,7 @@ function getPasswordOptions(){
   
  
 getPasswordOptions();
-console.log(password.passwordInput);
+
 
 
 
