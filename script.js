@@ -137,6 +137,7 @@ function getPasswordOptions(){
       if(userChoiceNumb === true){
         password.incNumbs = true;
         password.passwordInput = password.passwordInput.concat(numericCharacters);
+        password.passwordInput = password.passwordInput.concat(numericCharacters);
 
       }
       userChoiceSpecials = confirm("Do you want your password to include special characters?");
@@ -153,7 +154,7 @@ function getPasswordOptions(){
   
  
 getPasswordOptions();
-console.log(password);
+console.log(password.passwordInput);
 
 
 
@@ -166,29 +167,58 @@ function getRandom() {
 }
 
 getRandom();
+
 // Function to generate password with user input
 function generatePassword() {
   console.log(password.incLwrCase);
-  
-  // if(password.incLwrCase === true){
-  //   password.passwordInput = password.passwordInput.concat(lowerCasedCharacters);
-  // }
-  
-  // if(password.incUppCase === true){
-  //   password.passwordInput = password.passwordInput.concat(upperCasedCharacters);
-  // }
-  
-  // if(password.incNumbs === true){
-  //   password.passwordInput = password.passwordInput.concat(numericCharacters);
-  // }
-  
-  // if(password.incSpecials === true){
-  //   password.passwordInput = password.passwordInput.concat(specialCharacters);
-  // }
+  //ensure that within the first 8 characters at least 2 characters from each selected set are included.
+  var firstEight = [0,1,2,3,4,5,6,7]
+  var randIndexInFirstEight = Math.floor(Math.random()*firstEight.length)+1;
+
+  randLetter = Math.floor(Math.random() * upperCasedCharacters.length) + 1;
+  randSpecial = Math.floor(Math.random() * specialCharacters.length) + 1;
+  randNumb = Math.floor(Math.random()* numericCharacters.length)+1;
 
   for(var i =0;i <= password.length;i++){
     password.passwordOutput[i] = password.passwordInput[getRandom()];
   }
+
+
+
+  if(password.incLwrCase === true){
+    password.passwordOutput[randIndexInFirstEight] = lowerCasedCharacters[randLetter];
+    firstEight.splice(randIndexInFirstEight,1);
+  }
+  if(password.incLwrCase === true){
+    password.passwordOutput[randIndexInFirstEight] = lowerCasedCharacters[randLetter];
+    firstEight.splice(randIndexInFirstEight,1);
+  }
+  if(password.incUppCase === true){
+    password.passwordOutput[randIndexInFirstEight] = upperCasedCharacters[randLetter];
+    firstEight.splice(randIndexInFirstEight,1);
+  }
+  if(password.incUppCase === true){
+    password.passwordOutput[randIndexInFirstEight] = upperCasedCharacters[randLetter];
+    firstEight.splice(randIndexInFirstEight,1);
+  }
+  if(password.incNumbs === true){
+    password.passwordOutput[randIndexInFirstEight] = numericCharacters[randNumb];
+    firstEight.splice(randIndexInFirstEight,1);  
+  } 
+  if(password.incNumbs === true){
+    password.passwordOutput[randIndexInFirstEight] = numericCharacters[randNumb];
+    firstEight.splice(randIndexInFirstEight,1);  
+  } 
+  if(password.incSpecials === true){
+    password.passwordOutput[randIndexInFirstEight] = specialCharacters[randSpecial];
+    firstEight.splice(randIndexInFirstEight,1); 
+  }
+  if(password.incSpecials === true){
+    password.passwordOutput[randIndexInFirstEight] = specialCharacters[randSpecial];
+    firstEight.splice(randIndexInFirstEight,1); 
+  }
+
+  console.log(firstEight);
   return  password.passwordOutput.join('');
 }
 
